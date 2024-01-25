@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<a href="{{ url_for('add_github_user') }}" 
+class="m-2 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+New Github Username
+</a>
+
+
+
+	{% for  github_user in github_users %}
+
+			<div class="w-">
+				<div class="block p-6 rounded-lg shadow-lg bg-white ">
+					<h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{github_user.username}}</h5>
+					{% if github_user.status == 'N' %}
+					<h5>Novo item</h5>
+					{% endif %}
+
+					{% if github_user.status == 'U' %}
+					<h5>Item atualizado</h5>
+					{% endif %}
+
+
+				<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+					<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+						<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+							<tr>
+								<th scope="col" class="px-6 py-3">
+									Name
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Address
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Description
+								</th>
+								<th scope="col" class="px-6 py-3">
+									Language
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+					
+							{% for repository in github_user.repositories %}
+							<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+								<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+									{{repository.name}}
+								</th>
+								<td class="px-6 py-4">
+									{{repository.html_url}}
+								</td>
+								<td class="px-6 py-4">
+									{{repository.description}}
+								</td>
+								<td class="px-6 py-4">
+									${{repository.language}}
+								</td>
+
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			
+
+
+			</div>
+		</div>
+	{% endfor %}
+
+
+{% endblock content %}
