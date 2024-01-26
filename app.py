@@ -14,13 +14,13 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def home(request: Request):
 
-    github_users = backend_mod.get_github_users()
+    github_users = backend_mod.get_github_users() # get the persisted object
 
-    if len(request.query_params) > 0:
+    if len(request.query_params) > 0: #only do  this logic after a redirect from the input form
         idx = int(dict(request.query_params)['idx'])
 
-        if idx > -1:
-            github_users['users'][idx]['status'] = 'U'
+        if idx > -1: # the status flag is not persisted (that is the reason to keep this logic here)
+            github_users['users'][idx]['status'] = 'U' 
         else: 
             github_users['users'][len(github_users['users'])-1]['status'] = 'N'
 
