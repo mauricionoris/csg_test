@@ -43,7 +43,7 @@ async def add_github_user(
     github_username: str = Form()):
     
     usr_idx = backend_mod.upsert_github_users(github_username)
-    params = "?idx={idx}".format(idx=usr_idx)
+    params = "?idx={idx}".format(idx=usr_idx) #todo: refactor to not use query string 
 
 
     return RedirectResponse(
@@ -51,6 +51,15 @@ async def add_github_user(
         status_code=302,
         )
 
+
+@app.post("/update")
+async def update_github_user():
+
+
+    return RedirectResponse(
+        url=app.url_path_for("home") + params,
+        status_code=302,
+        )
 
 if __name__ == "__main__":
     

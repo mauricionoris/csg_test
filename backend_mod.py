@@ -1,5 +1,6 @@
 import pickle as pk 
-from  intr_github import call_github_api
+import time  
+from  intr_github_mod import call_github_api
 
 GITHUB_PERSISTED_FILE = './data/github_users.pickle'
 
@@ -25,7 +26,7 @@ def get_github_users():
 def upsert_github_users(github_user):
     usr_idx = -1
     rep_list = call_github_api(github_user)
-    github_user_obj = {"username": github_user, "status": "",  "repositories": rep_list }
+    github_user_obj = {"username": github_user, "status": "", "updated": time.time() ,  "repositories": rep_list }
     gh_list = get_github_users() # gets the file 
 
     for i, u in enumerate(gh_list['users']):

@@ -13,13 +13,16 @@ New Github Username
 
 			<div class="w-">
 				<div class="block p-6 rounded-lg shadow-lg bg-white ">
-					<h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{github_user.username}}</h5>
+					<span class="text-gray-900 text-xl leading-tight font-medium mb-2">Username: {{github_user.username}}    </span>
+					<span class="text-gray-500 text-xl leading-tight font-small mb-2 align:text-right"> (Updated in: {{ github_user.updated }} )</span> <!--TODO: convert to readable date time-->
+					
 					{% if github_user.status == 'N' %}
-					<h5>Novo item</h5>
+					<span class="block p-6 rounded-lg shadow-lg bg-white ">New Item</span>  <!--TODO: format this message better-->
 					{% endif %}
 
 					{% if github_user.status == 'U' %}
-					<h5>Item atualizado</h5>
+					<span class="block p-6 rounded-sm shadow-lg bg-white" >Updated</span> <!--TODO: format this message better-->
+
 					{% endif %}
 
 
